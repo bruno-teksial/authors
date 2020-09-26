@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+
+  app:
+    container_name: author_app
+    build: 
+        context: .
+        target: base
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - '8080:80'
+    expose:
+      - '8080'
