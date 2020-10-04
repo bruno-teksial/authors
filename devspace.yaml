@@ -1,0 +1,53 @@
+version: v1beta9
+images:
+  authors:
+    image: docker.pkg.github.com/bruno-teksial/authors/authors
+    preferSyncOverRebuild: true
+    injectRestartHelper: true
+    appendDockerfileInstructions:
+    - USER root
+    entrypoint:
+      - apache2-foreground
+    dockerfile: ./Dockerfile
+    context: .
+    build:
+      docker:
+        options:
+          target: dev
+deployments:
+- name: authors-deployments
+  helm:
+    chart:
+      name: ../helm/book-store
+    recreate: true
+    cleanupOnFail: true
+    componentChart: false
+    atomic: true
+    valuesFiles:
+      - values.yaml
+dev:
+  ports:
+  - imageName: authors
+    forward:
+    - port: 8081
+      remotePort: 80
+  open:
+  - url: http://0.0.0.0:8081
+  sync:
+  - imageName: authors
+    localSubPath: ./src/
+    excludePaths:
+    - .git/
+    uploadExcludePaths:
+    - devspace.yaml
+    onUpload:
+      restartContainer: true
+profiles:
+- name: production
+  patches:
+  - op: remove
+    path: images.app.injectRestartHelper
+  - op: remove
+    path: images.app.appendDockerfileInstructions
+  - op: remove
+    path: images.app.build.docker.options.target

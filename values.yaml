@@ -1,0 +1,15 @@
+ingress:
+  enable: false
+
+services:
+  authors:
+    enable: true
+    name: "authors"
+    service:
+      name: "authorservice"
+    image: docker.pkg.github.com/bruno-teksial/authors/authors
+    pullSecret: devspace-auth-docker-pkg-github-com
+    pullPolicy: Always
+    port: 80
+    target: 80
+    api: "/authors"

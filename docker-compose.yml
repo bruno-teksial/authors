@@ -3,13 +3,15 @@ version: '3.7'
 services:
 
   app:
-    container_name: author_app
+    container_name: authors
     build: 
         context: .
-        target: base
-    volumes:
-      - ./src:/var/www/html
+        target: dev
+    # volumes:
+    #   - ./src:/var/www/html
     ports:
       - '8080:80'
-    expose:
-      - '8080'
+
+
+# docker-compose up --build -d
+# docker-compose down --volumes

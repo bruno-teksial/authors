@@ -25,5 +25,5 @@ RUN set -xe && \
     a2enmod rewrite && \
     php -m
 
-FROM base as prod
+FROM base as dev
 COPY ./src /var/www/html

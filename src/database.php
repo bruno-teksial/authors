@@ -10,9 +10,10 @@ if( !file_exists ("/tmp/$dbname.sqlite"))
         "dbname" => "/tmp/$dbname.sqlite",
     ]))->createTable($dbname, "", array(
         "columns" => array(
-            new Column("id", array("type" => Column::TYPE_VARCHAR, "size" => 70,"notNull" => true)),
+            new Column("id", array("type" => Column::TYPE_VARCHAR, "size" => 70, "notNull" => true)),
             new Column("author", array("type" => Column::TYPE_VARCHAR, "size" => 70,"notNull" => true)),
             new Column("books", array("type" => Column::TYPE_VARCHAR, "size" => 13, "notNull" => true,)),
+            new Column("about", array("type" => Column::TYPE_TEXT)),
         )
     ));
 }
