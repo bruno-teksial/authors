@@ -1,9 +1,8 @@
-ingress:
-  enable: false
-
 services:
   authors:
+    unique_name: authors-95d8427e
     enable: true
+    ingress: true
     name: "authors"
     service:
       name: "authorservice"
