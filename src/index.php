@@ -40,7 +40,7 @@ $app->get("/authors/{id}", function ($id) use ($app, $connection, $dbname) {
     if(!$id) {
         return $app->response->setStatusCode(404, 'Not Found')->send();
     }
-    $data = $connection->fetchOne("SELECT * FROM $dbname WHERE id LIKE '$id'");
+    $data = $connection->fetchOne("SELECT * FROM $dbname WHERE books='$id'");
     if(!$data) {
         return $app->response->setStatusCode(404, 'Not Found')->send();
     }
